@@ -1,21 +1,23 @@
-﻿using AcompanhamentoFisico.Model;
+﻿using AcompanhamentoFisico.DTO;
+using AcompanhamentoFisico.Model;
+using AutoMapper;
 using System.Data.SqlClient;
 using System.Data;
-using AutoMapper;
-using AcompanhamentoFisico.DTO;
-using Microsoft.AspNetCore.HttpLogging;
 
-namespace AcompanhamentoFisico.DAO
+namespace DadosAntropometricos.DAO
 {
-    public class MedidasIniciaisDAO
+    public class MedidasAtuaisDAO
     {
         String conexao = @"Server=DESKTOP-BJNTUCI\MSSQLSERVER01;Database=Cliente;Trusted_Connection=True";
-        public MedidasDTO retornaMedidas(String CPF)
+
+        public MedidasDTO retornaMedidasAtuais(String CPF)
         {
+            String conexao = @"Server=DESKTOP-BJNTUCI\MSSQLSERVER01;Database=Cliente;Trusted_Connection=True";
+
             MedidasDTO medidasDTO = new MedidasDTO();
             Medidas medidas = new Medidas();
 
-            string sql = "Select id_medidas,peso,altura,circunferencia_abdominal,IMC,ombro,peitoral,braco_esquerdo,braco_direito,coxa_esquerda,coxa_direita,biceps_esquerdo,biceps_direito,antebraco_direito,antebraco_esquerdo,panturrilha_esquerda,panturrilha_direita,quadril,gluteos,id_fk_cliente FROM dbo.Medidas_Antropometricas_Iniciais medidas  inner join dbo.DadosPessoaisCliente dadosPessoais on medidas.id_fk_cliente = dadosPessoais.id_pk_cliente where CPF =" + "'" + CPF + "'";
+            string sql = "Select id_medidas,peso,altura,circunferencia_abdominal,IMC,ombro,peitoral,braco_esquerdo,braco_direito,coxa_esquerda,coxa_direita,biceps_esquerdo,biceps_direito,antebraco_direito,antebraco_esquerdo,panturrilha_esquerda,panturrilha_direita,quadril,gluteos,id_fk_cliente FROM dbo.Medidas_Antropometricas_Atual medidas  inner join dbo.DadosPessoaisCliente dadosPessoais on medidas.id_fk_cliente = dadosPessoais.id_pk_cliente where CPF =" + "'" + CPF + "'";
             SqlConnection con = new SqlConnection(conexao);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -38,7 +40,7 @@ namespace AcompanhamentoFisico.DAO
                     medidas.bracoEsquerdo = Convert.ToDecimal(reader["braco_esquerdo"]);
                     medidas.bracoDireito = Convert.ToDecimal(reader["braco_direito"]);
                     medidas.coxaDireita = Convert.ToDecimal(reader["coxa_direita"]);
-                    medidas.coxaEsquerda = Convert.ToDecimal(reader["coxa_esquerda"]);                  
+                    medidas.coxaEsquerda = Convert.ToDecimal(reader["coxa_esquerda"]);
                     medidas.bicepsEsquerdo = Convert.ToDecimal(reader["biceps_esquerdo"]);
                     medidas.bicepsDireito = Convert.ToDecimal(reader["biceps_direito"]);
                     medidas.antebracoDireito = Convert.ToDecimal(reader["antebraco_direito"]);
@@ -71,12 +73,13 @@ namespace AcompanhamentoFisico.DAO
 
             return medidasDTO;
         }
-        public int insereMedidas(MedidasDTO medidasDTO, String CPF)
+
+        public int insereMedidasAtuais(MedidasDTO medidasDTO, String CPF)
         {
 
-          
-            string sql = "INSERT INTO dbo.Medidas_Antropometricas_Iniciais (peso,altura,circunferencia_abdominal,IMC,ombro,peitoral,braco_esquerdo,braco_direito,coxa_esquerda,coxa_direita,biceps_direito,biceps_esquerdo,antebraco_esquerdo,antebraco_direito,panturrilha_esquerda,panturrilha_direita,quadril,gluteos,id_fk_cliente) " +
-                "VALUES (" + medidasDTO.peso + "," +medidasDTO.altura + "," + medidasDTO.circunferenciaAbdominal + "," + medidasDTO.IMC + "," + medidasDTO.ombro + ","+ medidasDTO.peitoral + "," + medidasDTO.bracoEsquerdo + "," + medidasDTO.bracoDireito + "," + medidasDTO.coxaEsquerda + "," + medidasDTO.coxaDireita + "," + medidasDTO.bicepsDireito + "," + medidasDTO.bicepsEsquerdo + "," + medidasDTO.antebracoEsquerdo + "," + medidasDTO.antebracoDireito + "," + medidasDTO.panturrilhaEsquerda + "," + medidasDTO.panturrilhaDireita + "," + medidasDTO.quadril + "," + medidasDTO.gluteos + "," +"(select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + "'" + CPF + "'" + ")" + " )";
+
+            string sql = "INSERT INTO dbo.Medidas_Antropometricas_Atual (peso,altura,circunferencia_abdominal,IMC,ombro,peitoral,braco_esquerdo,braco_direito,coxa_esquerda,coxa_direita,biceps_direito,biceps_esquerdo,antebraco_esquerdo,antebraco_direito,panturrilha_esquerda,panturrilha_direita,quadril,gluteos,id_fk_cliente) " +
+                "VALUES (" + medidasDTO.peso + "," + medidasDTO.altura + "," + medidasDTO.circunferenciaAbdominal + "," + medidasDTO.IMC + "," + medidasDTO.ombro + "," + medidasDTO.peitoral + "," + medidasDTO.bracoEsquerdo + "," + medidasDTO.bracoDireito + "," + medidasDTO.coxaEsquerda + "," + medidasDTO.coxaDireita + "," + medidasDTO.bicepsDireito + "," + medidasDTO.bicepsEsquerdo + "," + medidasDTO.antebracoEsquerdo + "," + medidasDTO.antebracoDireito + "," + medidasDTO.panturrilhaEsquerda + "," + medidasDTO.panturrilhaDireita + "," + medidasDTO.quadril + "," + medidasDTO.gluteos +"," + "(select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + "'" + CPF + "'" + ")" + " )";
             SqlConnection con = new SqlConnection(conexao);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -88,10 +91,10 @@ namespace AcompanhamentoFisico.DAO
             return retorno;
         }
 
-        public int deletaMedidas(String CPF)
+        public int deletaMedidasAtuais(String CPF)
         {
             String retorno = "";
-            string sql = "delete from dbo.Medidas_Antropometricas_Iniciais where  id_fk_cliente = (select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + CPF + ");";
+            string sql = "delete from dbo.Medidas_Antropometricas_Atual where  id_fk_cliente = (select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + CPF + ");";
 
             SqlConnection con = new SqlConnection(conexao);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -104,11 +107,11 @@ namespace AcompanhamentoFisico.DAO
 
         }
 
-        public int alteraMedidas(MedidasDTO medidasDTO,String CPF)
+        public int alteraMedidasAtuais(MedidasDTO medidasDTO, String CPF)
         {
 
-           
-            string sql = "UPDATE dbo.Medidas_Antropometricas_Iniciais SET  peso=" + medidasDTO.peso + "," + "altura=" + medidasDTO.altura +"," + "circunferencia_abdominal=" + medidasDTO.circunferenciaAbdominal + "," + "IMC=" + medidasDTO.IMC + "," + "ombro=" + medidasDTO.ombro + "," + "peitoral=" + medidasDTO.peitoral + "," + "braco_esquerdo=" + medidasDTO.bracoEsquerdo + "," + "braco_direito=" + medidasDTO.bracoDireito + "," + "coxa_esquerda=" +  medidasDTO.coxaEsquerda + "," + "coxa_direita=" + medidasDTO.coxaDireita + "," + "biceps_esquerdo=" + medidasDTO.bicepsEsquerdo + "," + "biceps_direito=" + medidasDTO.bicepsDireito +"," + "antebraco_direito=" + medidasDTO.antebracoDireito + "," + "antebraco_esquerdo=" + medidasDTO.antebracoEsquerdo + "," + "panturrilha_esquerda="+ medidasDTO.panturrilhaEsquerda + "," + "panturrilha_direita=" + medidasDTO.panturrilhaDireita  + "," + "quadril=" + medidasDTO.quadril + "," + "gluteos=" +  medidasDTO.gluteos + "  where id_fk_cliente = (select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + "'" + CPF + "'" + ");";
+
+            string sql = "UPDATE dbo.Medidas_Antropometricas_Atual SET  peso=" + medidasDTO.peso + "," + "altura=" + medidasDTO.altura + "," + "circunferencia_abdominal=" + medidasDTO.circunferenciaAbdominal + "," + "IMC=" + medidasDTO.IMC + "," + "ombro=" + medidasDTO.ombro + "," + "peitoral=" + medidasDTO.peitoral + "," + "braco_esquerdo=" + medidasDTO.bracoEsquerdo + "," + "braco_direito=" + medidasDTO.bracoDireito + "," + "coxa_esquerda=" + medidasDTO.coxaEsquerda + "," + "coxa_direita=" + medidasDTO.coxaDireita + "," + "biceps_esquerdo=" + medidasDTO.bicepsEsquerdo + "," + "biceps_direito=" + medidasDTO.bicepsDireito + "," + "antebraco_direito=" + medidasDTO.antebracoDireito + "," + "antebraco_esquerdo=" + medidasDTO.antebracoEsquerdo + "," + "panturrilha_esquerda=" + medidasDTO.panturrilhaEsquerda + "," + "panturrilha_direita=" + medidasDTO.panturrilhaDireita + "," + "quadril=" + medidasDTO.quadril + "," + "gluteos=" + medidasDTO.gluteos + "  where id_fk_cliente = (select id_pk_cliente from dbo.DadosPessoaisCliente where CPF=" + "'" + CPF + "'" + ");";
             SqlConnection con = new SqlConnection(conexao);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -119,7 +122,6 @@ namespace AcompanhamentoFisico.DAO
 
             return retorno;
         }
-
 
     }
 }
