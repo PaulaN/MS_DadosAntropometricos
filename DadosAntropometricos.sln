@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34024.191
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DadosAntropometricos", "DadosAntropometricos\DadosAntropometricos.csproj", "{E9DA36E6-5389-460E-9203-A6354F178505}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9DA36E6-5389-460E-9203-A6354F178505}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9DA36E6-5389-460E-9203-A6354F178505}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9DA36E6-5389-460E-9203-A6354F178505}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9DA36E6-5389-460E-9203-A6354F178505}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {6930D264-4389-430C-8BA3-117815F5E318}
+	EndGlobalSection
+EndGlobal
