@@ -35,5 +35,14 @@ namespace DadosAntropometricos.Controllers
             return medidasDTO;
         }
 
+        [HttpGet("mostraProgressoNecessarioMes/{CPF}/MES")]
+        public MedidasDTO MostraQuantoPrecisaProgredirPorMes(String CPF,int mes)
+        {
+
+            MedidasDTO medidasDTO = bll.MostraResultadoPorMes(CPF,mes);
+
+            return medidasDTO;
+        }
+
     }
 }

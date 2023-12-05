@@ -399,5 +399,32 @@ namespace DadosAntropometricos.BLL
             return medidasDiferenca;
         }
 
+        public MedidasDTO MostraResultadoPorMes(String CPF,int qtdMeses)
+        { 
+            MedidasDTO medidasDTO = new MedidasDTO();
+
+            MedidasDTO medidasDTOObjetivo = MostraDiferencaParaObjetivo(CPF);
+
+            medidasDTO.peso = medidasDTOObjetivo.peso / qtdMeses;
+            medidasDTO.circunferenciaAbdominal = medidasDTOObjetivo.circunferenciaAbdominal / qtdMeses;
+            medidasDTO.ombro = medidasDTOObjetivo.ombro / qtdMeses;
+            medidasDTO.peitoral = medidasDTOObjetivo.peitoral / qtdMeses;
+            medidasDTO.bracoEsquerdo = medidasDTOObjetivo.bracoEsquerdo / qtdMeses;
+            medidasDTO.bracoDireito = medidasDTOObjetivo.bracoDireito / qtdMeses;
+            medidasDTO.coxaEsquerda = medidasDTOObjetivo.coxaEsquerda / qtdMeses;
+            medidasDTO.coxaDireita = medidasDTOObjetivo.coxaDireita / qtdMeses;
+            medidasDTO.bicepsEsquerdo = medidasDTOObjetivo.bicepsEsquerdo / qtdMeses;
+            medidasDTO.bicepsDireito = medidasDTOObjetivo.bicepsDireito / qtdMeses;
+            medidasDTO.antebracoDireito = medidasDTOObjetivo.antebracoDireito / qtdMeses;
+            medidasDTO.antebracoEsquerdo = medidasDTOObjetivo.antebracoEsquerdo / qtdMeses;
+            medidasDTO.panturrilhaDireita = medidasDTOObjetivo.panturrilhaDireita / qtdMeses;
+            medidasDTO.panturrilhaEsquerda = medidasDTOObjetivo.panturrilhaEsquerda / qtdMeses;
+            medidasDTO.quadril = medidasDTOObjetivo.quadril / qtdMeses;
+            medidasDTO.gluteos = medidasDTOObjetivo.gluteos / qtdMeses;
+
+            return medidasDTO;
+
+
+        }
     }
 }
