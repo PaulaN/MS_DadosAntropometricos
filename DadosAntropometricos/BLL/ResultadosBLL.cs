@@ -1,4 +1,5 @@
-﻿using AcompanhamentoFisico.DTO;
+﻿using AcompanhamentoFisico.DAO;
+using AcompanhamentoFisico.DTO;
 using DadosAntropometricos.DAO;
 
 namespace DadosAntropometricos.BLL
@@ -7,6 +8,7 @@ namespace DadosAntropometricos.BLL
     {
         MedidasAtuaisDAO daoAtual = new MedidasAtuaisDAO();
         MedidasObjetivoDAO daoObjetivo = new MedidasObjetivoDAO();
+        MedidasIniciaisDAO daoIniciais = new MedidasIniciaisDAO();
 
         public MedidasDTO MostraDiferencaParaObjetivo(String CPF)
         {
@@ -197,6 +199,201 @@ namespace DadosAntropometricos.BLL
             else
             {
                 medidasDiferenca.gluteos = medidasAtuais.gluteos - medidasObjetivo.gluteos;
+            }
+            #endregion
+            return medidasDiferenca;
+        }
+
+
+        public MedidasDTO MostraProgresso(String CPF)
+        {
+            MedidasDTO medidasAtuais = daoAtual.retornaMedidasAtuais(CPF);
+            MedidasDTO medidasInicias = daoIniciais.retornaMedidas(CPF);
+
+            MedidasDTO medidasDiferenca = new MedidasDTO();
+
+            #region peso
+            if (medidasAtuais.peso >= medidasInicias.peso)
+            {
+                medidasDiferenca.peso = medidasInicias.peso - medidasAtuais.peso;
+            }
+            else
+            {
+                medidasDiferenca.peso = medidasAtuais.peso - medidasInicias.peso;
+            }
+
+
+            #endregion
+
+            #region circunferenciaAbdominal
+            if (medidasAtuais.circunferenciaAbdominal >= medidasInicias.circunferenciaAbdominal)
+            {
+                medidasDiferenca.circunferenciaAbdominal = medidasInicias.circunferenciaAbdominal - medidasAtuais.circunferenciaAbdominal;
+            }
+            else
+            {
+                medidasDiferenca.circunferenciaAbdominal = medidasAtuais.circunferenciaAbdominal - medidasInicias.circunferenciaAbdominal;
+            }
+            #endregion
+
+            # region ombro
+            if (medidasAtuais.ombro >= medidasInicias.ombro)
+            {
+                medidasDiferenca.ombro = medidasInicias.ombro - medidasAtuais.ombro;
+            }
+            else
+            {
+                medidasDiferenca.ombro = medidasAtuais.ombro - medidasInicias.ombro;
+            }
+            #endregion
+
+
+            #region peitoral
+            if (medidasAtuais.peitoral >= medidasInicias.peitoral)
+            {
+                medidasDiferenca.peitoral = medidasInicias.peitoral - medidasAtuais.peitoral;
+            }
+            else
+            {
+                medidasDiferenca.peitoral = medidasAtuais.peitoral - medidasInicias.peitoral;
+            }
+            #endregion
+
+            #region bracoEsquerdo
+            if (medidasAtuais.bracoEsquerdo >= medidasInicias.bracoEsquerdo)
+            {
+                medidasDiferenca.bracoEsquerdo = medidasInicias.bracoEsquerdo - medidasAtuais.bracoEsquerdo;
+            }
+            else
+            {
+                medidasDiferenca.bracoEsquerdo = medidasAtuais.bracoEsquerdo - medidasInicias.bracoEsquerdo;
+            }
+            #endregion
+
+            #region bracoDireito
+            if (medidasAtuais.bracoDireito >= medidasInicias.bracoDireito)
+            {
+                medidasDiferenca.bracoDireito = medidasInicias.bracoDireito - medidasAtuais.bracoDireito;
+            }
+            else
+            {
+                medidasDiferenca.bracoDireito = medidasAtuais.bracoDireito - medidasInicias.bracoDireito;
+            }
+            #endregion
+
+
+            #region coxaEsquerda
+            if (medidasAtuais.coxaEsquerda >= medidasInicias.coxaEsquerda)
+            {
+                medidasDiferenca.coxaEsquerda = medidasInicias.coxaEsquerda - medidasAtuais.coxaEsquerda;
+            }
+            else
+            {
+                medidasDiferenca.coxaEsquerda = medidasAtuais.coxaEsquerda - medidasInicias.coxaEsquerda;
+            }
+            #endregion
+
+
+            #region coxaDireita
+            if (medidasAtuais.coxaDireita >= medidasInicias.coxaDireita)
+            {
+                medidasDiferenca.coxaDireita = medidasInicias.coxaDireita - medidasAtuais.coxaDireita;
+            }
+            else
+            {
+                medidasDiferenca.coxaDireita = medidasAtuais.coxaDireita - medidasInicias.coxaDireita;
+            }
+            #endregion
+
+            #region bicepsEsquerdo
+            if (medidasAtuais.bicepsEsquerdo >= medidasInicias.bicepsEsquerdo)
+            {
+                medidasDiferenca.bicepsEsquerdo = medidasInicias.bicepsEsquerdo - medidasAtuais.bicepsEsquerdo;
+            }
+            else
+            {
+                medidasDiferenca.bicepsEsquerdo = medidasAtuais.bicepsEsquerdo - medidasInicias.bicepsEsquerdo;
+            }
+            #endregion
+
+            #region bicepsDireito
+            if (medidasAtuais.bicepsDireito >= medidasInicias.bicepsDireito)
+            {
+                medidasDiferenca.bicepsDireito = medidasInicias.bicepsDireito - medidasAtuais.bicepsDireito;
+            }
+            else
+            {
+                medidasDiferenca.bicepsDireito = medidasAtuais.bicepsDireito - medidasInicias.bicepsDireito;
+            }
+            #endregion
+
+            #region antebracoEsquerdo
+            if (medidasAtuais.antebracoEsquerdo >= medidasInicias.antebracoEsquerdo)
+            {
+                medidasDiferenca.antebracoEsquerdo = medidasInicias.antebracoEsquerdo - medidasAtuais.antebracoEsquerdo;
+            }
+            else
+            {
+                medidasDiferenca.antebracoEsquerdo = medidasAtuais.antebracoEsquerdo - medidasInicias.antebracoEsquerdo;
+            }
+            #endregion
+
+
+            #region antebracoDireito
+            if (medidasAtuais.antebracoDireito >= medidasInicias.antebracoDireito)
+            {
+                medidasDiferenca.antebracoDireito = medidasInicias.antebracoDireito - medidasAtuais.antebracoDireito;
+            }
+            else
+            {
+                medidasDiferenca.antebracoDireito = medidasAtuais.antebracoDireito - medidasInicias.antebracoDireito;
+            }
+            #endregion
+
+            #region panturrilhaEsquerda
+            if (medidasAtuais.panturrilhaEsquerda >= medidasInicias.panturrilhaEsquerda)
+            {
+                medidasDiferenca.panturrilhaEsquerda = medidasInicias.panturrilhaEsquerda - medidasAtuais.panturrilhaEsquerda;
+            }
+            else
+            {
+                medidasDiferenca.panturrilhaEsquerda = medidasAtuais.panturrilhaEsquerda - medidasInicias.panturrilhaEsquerda;
+            }
+            #endregion
+
+
+            #region panturrilhaDireita
+            if (medidasAtuais.panturrilhaDireita >= medidasInicias.panturrilhaDireita)
+            {
+                medidasDiferenca.panturrilhaDireita = medidasInicias.panturrilhaDireita - medidasAtuais.panturrilhaDireita;
+            }
+            else
+            {
+                medidasDiferenca.panturrilhaDireita = medidasAtuais.panturrilhaDireita - medidasInicias.panturrilhaDireita;
+            }
+            #endregion
+
+
+            #region quadril
+            if (medidasAtuais.quadril >= medidasInicias.quadril)
+            {
+                medidasDiferenca.quadril = medidasInicias.quadril - medidasAtuais.quadril;
+            }
+            else
+            {
+                medidasDiferenca.quadril = medidasAtuais.quadril - medidasInicias.quadril;
+            }
+            #endregion
+
+
+            #region gluteos
+            if (medidasAtuais.gluteos >= medidasInicias.gluteos)
+            {
+                medidasDiferenca.gluteos = medidasInicias.gluteos - medidasAtuais.gluteos;
+            }
+            else
+            {
+                medidasDiferenca.gluteos = medidasAtuais.gluteos - medidasInicias.gluteos;
             }
             #endregion
             return medidasDiferenca;

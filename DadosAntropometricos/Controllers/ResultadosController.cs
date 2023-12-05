@@ -13,11 +13,22 @@ namespace DadosAntropometricos.Controllers
 
         ResultadosBLL bll = new ResultadosBLL();
 
-        [HttpGet("{CPF}")]
-        public MedidasDTO BuscaPorCPF(String CPF)
+        [HttpGet("mostraDiferenca/{CPF}")]
+        public MedidasDTO MostraDiferencaParaObjetivo(String CPF)
         {
 
             MedidasDTO medidasDTO = bll.MostraDiferencaParaObjetivo(CPF);
+
+
+
+            return medidasDTO;
+        }
+
+        [HttpGet("mostraProgresso/{CPF}")]
+        public MedidasDTO MostraProgresso(String CPF)
+        {
+
+            MedidasDTO medidasDTO = bll.MostraProgresso(CPF);
 
 
 
